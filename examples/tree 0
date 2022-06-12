@@ -1,0 +1,32 @@
+Vocabulary:
+Args:
+    length
+    radius
+    angle
+    width
+    height
+    variation
+    var_perc
+    density
+    resolution
+    reduction
+    
+NODE F resolution:10 reduction:0.05 radius:5 variation:10
+NODE X resolution:4 density:10
+NODE [
+NODE ]
+NODE + variation:10 var_perc:0.5
+NODE - variation:10 var_perc:0.5
+NODE W variation:10 var_perc:0.5
+NODE S variation:10 var_perc:0.5
+
+Rules:
+RULE F (0.8):=FF|F[-X]F
+RULE X:=F[-X][+X][WX]SX
+
+Settings:
+START X
+SEED 1
+STEPS 6
+LEAF_COLOR 0 0.4 0 0.5
+TRUNK_COLOR 0.8 0.1 0.1 1
