@@ -6,6 +6,7 @@ class Node:
         self.args = args
 
     def __str__(self):
+        return self.id
         if self.args == {}:
             return self.id
         return self.id+"{"+",".join([str(k)+":"+str(v) for k,v in self.args.items()])+"}"
@@ -54,6 +55,7 @@ class CFG:
         if n == None:
             n = self.steps
         for _ in range(n):
+            #print(self.state())
             self._advance()
     
     def _advance(self):

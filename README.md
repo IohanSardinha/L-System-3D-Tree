@@ -85,28 +85,29 @@ Custom nodes can me used to with combination with probabilistic rules, in order 
 
 #### Example
 ```
-NODE F length:0.25 reduction:0.005 radius:4 variation:5 var_perc:0.1 resolution:30
-NODE X
+NODE F length:1.5 variation:15 radius:8 reduction:0.05
+NODE X density:3
 NODE [
 NODE ]
-NODE + angle:90
-NODE - angle:90   
-NODE W angle:90
-NODE S angle:90
-NODE A forward:1 length:0.13 variation:4 var_perc:0.1
-NODE B forward:1 length:0.18 variation:5 var_perc:0.1
-NODE T leaf:1 density:100 variation:180 length:2 width:0.2 resolution:4
+NODE + angle:45
+NODE - angle:45
+NODE S angle:45
+NODE W angle:45
+NODE T leaf:1
+NODE A leaf:1
+NODE B leaf:1
+NODE C forward:1 length:2 variation:30 density:3
+NODE D forward:1 length:3 variation:30 density:3
 
-RULE F (0.9):=FF|F
-RULE X:=[+B-T][-B+T][WBST][SBWT]AX
-RULE B:=BB
-RULE A:=AA
+RULE F (0.03):=FF|F
+RULE C (0.01):=C[X]C|C
+RULE X (0.25):=[+CT]DX|A
+RULE A (0.33333):=[-CT]DX|B
+RULE B (0.5):=[WCT]DX|[SCT]DX
 
 START FX
-SEED 1
-STEPS 8
-LEAF_COLOR 0 0.05 0 1
-TRUNK_COLOR 0.05 0.01 0.01 1
+SEED 5
+STEPS 100
 ```
 Other examples can be found in [examples](examples/) folder
 

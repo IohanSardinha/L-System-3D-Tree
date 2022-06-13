@@ -199,6 +199,7 @@ def build_tree(fileName):
     grammar.loadCFG(fileName)
     
     if grammar.seed:
+        print(grammar.seed)
         seed(grammar.seed)
         
     grammar.advance()
@@ -207,6 +208,6 @@ def build_tree(fileName):
     
 def main():
     
-    build_tree("examples/tree 0")
+    build_tree("examples/tree 3")
     
 main()
