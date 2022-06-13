@@ -26,7 +26,7 @@ The instructions are the following, the brackets represent oprional fields:
 | Instruction | Description|
 |---|---|
 |`NODE ID [args]`|A token on the grammar vocabulary. Described in more detail bellow| 
-|`RULE FROM [(chance)]:=TO1[|TO2]`|A rule in the grammar. The tokens used must have ben defined before. Described in more detail bellow|
+|`RULE FROM [(chance)]:=TO1[\|TO2]`|A rule in the grammar. The tokens used must have ben defined before. Described in more detail bellow|
 |`START TOKEN`|The start tokens of the grammar, with no space between them. Can be one or many. Must have ben defined before as a token|
 |`SEED N`|The random function seed, in order to produce the same tree every time|
 |`STEPS N`|The number of times the grammar will be processed|
