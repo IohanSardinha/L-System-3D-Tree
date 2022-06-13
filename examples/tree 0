@@ -10,6 +10,8 @@ Vocabulary:
         density
         resolution
         reduction
+        leaf
+        forward
     
 NODE F resolution:10 reduction:0.05 radius:5 variation:10
 NODE X resolution:4 density:10
