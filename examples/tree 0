@@ -1,15 +1,15 @@
 Vocabulary:
-Args:
-    length
-    radius
-    angle
-    width
-    height
-    variation
-    var_perc
-    density
-    resolution
-    reduction
+    Args:
+        length
+        radius
+        angle
+        width
+        height
+        variation
+        var_perc
+        density
+        resolution
+        reduction
     
 NODE F resolution:10 reduction:0.05 radius:5 variation:10
 NODE X resolution:4 density:10

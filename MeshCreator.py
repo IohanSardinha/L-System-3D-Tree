@@ -55,14 +55,16 @@ def make_circle(radius=1, center=Vector((0,0,0)), subdivisions=30):
 
 def rotate(p, r):
     for pi in p:
-        pi.rotate(Euler((radians(r[0]),radians(r[1]),radians(r[2])),'XYZ'))
+        pi.rotate(Euler((radians(r[0]),0,0),'XYZ'))
+        pi.rotate(Euler((0,radians(r[1]),0),'XYZ'))
+        pi.rotate(Euler((0,0,radians(r[2])),'XYZ'))
     
 def translate(p, t):
     for pi in p:
         pi += Vector(t)
 
 def create_mesh(vertices,faces):
-    name="Cylinder"
+    name="Tree"
     me = bpy.data.meshes.new(name+"Mesh")
     ob = bpy.data.objects.new(name, me)
     ob.location = bpy.context.scene.cursor.location

@@ -1,0 +1,19 @@
+NODE F length:0.2 variation:5 var_perc:0.1 radius:0.3 reduction:0.015
+NODE X width:0.1 height:0.1 variation:45
+NODE [
+NODE ]
+NODE + length:0.2
+NODE - length:0.2   
+NODE W length:0.2
+NODE S length:0.2
+NODE R length:0.2
+NODE L length:0.2
+
+RULE F:=FF
+RULE X (0.5):=RF-[[X]+X]+LF[-X]+RFX|LF-[[X]+X]+RF[-X]+LFX
+
+START X
+SEED 3
+STEPS 5
+LEAF_COLOR 0 0.2 0 1
+TRUNK_COLOR 0.2 0.3 0.05 1

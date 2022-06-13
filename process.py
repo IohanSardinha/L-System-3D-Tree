@@ -57,7 +57,7 @@ def process(self):
             rotate([direction],(0,0,ang))
             rotation += Vector((0,0,ang))
         
-        if node == "F":        
+        if node == "F"  or ("forward" in node.args and node.args["forward"]):        
             pivot += direction*length
             last = base
             base = make_circle(radius=radius,subdivisions=resolution)
@@ -128,12 +128,12 @@ def process(self):
             
             radius *= radius_reduction
         
-        elif node == "R":
+        elif node == "L":
             
             last = base
             pivot += direction*length
-            rotate([direction],(0,0, angle))
-            rotation += Vector((0,0, angle))
+            rotate([direction],(0,0,angle))
+            rotation += Vector((0,0,angle))
             pivot += direction*length
             base = make_circle(radius=radius,subdivisions=resolution)
             rotate(base,rotation)
@@ -143,7 +143,7 @@ def process(self):
             
             radius *= radius_reduction
         
-        elif node == "L":
+        elif node == "R":
             
             last = base
             pivot += direction*length
@@ -162,24 +162,23 @@ def process(self):
             stack.append((pivot.copy(), direction.copy(), rotation.copy(),last,base,radius))
         elif node == "]":
             pivot, direction, rotation, last, base, radius = stack.pop()
-                
-        else:
+        
+        elif node == "X" or ("leaf" in node.args and node.args["leaf"]):
             pivot += direction*length
             
-            if node == "X" or ("leaf" in node.args and node.args["leaf"]):
-                res = 8 if "resolution" not in node.args else node.args["resolution"]
-                variation = 90 if "variation" not in node.args else node.args["variation"]
-                for _ in range(int(density)):
-                    leaf = make_leaf(width,height,res)
-                    add_circle(leaf, vertices, vertex_index)
-                    leaf_faces = close_circle(leaf, vertices, vertex_index, pivot.copy())
-                    leaves += [i for i in range(len(faces), len(faces)+len(leaf_faces))]
-                    faces += leaf_faces
-                    rotate(leaf,(randint(-variation,variation),0,0))
-                    rotate(leaf,(0,0,randint(-variation,variation)))
-                    rotate(leaf,(0,randint(-variation,variation),0))
-                    rotate(leaf,rotation)
-                    translate(leaf,pivot)
+            res = 8 if "resolution" not in node.args else node.args["resolution"]
+            variation = 90 if "variation" not in node.args else node.args["variation"]
+            for _ in range(int(density)):
+                leaf = make_leaf(width,height,res)
+                add_circle(leaf, vertices, vertex_index)
+                leaf_faces = close_circle(leaf, vertices, vertex_index, pivot.copy())
+                leaves += [i for i in range(len(faces), len(faces)+len(leaf_faces))]
+                faces += leaf_faces
+                rotate(leaf,(randint(-variation,variation),0,0))
+                rotate(leaf,(0,0,randint(-variation,variation)))
+                rotate(leaf,(0,randint(-variation,variation),0))
+                rotate(leaf,rotation)
+                translate(leaf,pivot)
             
             faces += close_circle(base,vertices, vertex_index, center=pivot.copy())
             pivot -= direction*length
@@ -194,11 +193,10 @@ def process(self):
     for leaf in leaves:
         tree.data.polygons[leaf].material_index = mat_idx[leaf_material.name]
 
-def main():
-    
+def build_tree(fileName):
     grammar = CFG()
     
-    grammar.loadCFG("examples/tree 0")
+    grammar.loadCFG(fileName)
     
     if grammar.seed:
         seed(grammar.seed)
@@ -206,6 +204,9 @@ def main():
     grammar.advance()
     
     process(grammar)
-
-
+    
+def main():
+    
+    build_tree("examples/tree 0")
+    
 main()

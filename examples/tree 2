@@ -1,0 +1,22 @@
+NODE F length:0.25 reduction:0.005 radius:4 variation:5 var_perc:0.1 resolution:30
+NODE X
+NODE [
+NODE ]
+NODE + angle:90
+NODE - angle:90   
+NODE W angle:90
+NODE S angle:90
+NODE A forward:1 length:0.13 variation:4 var_perc:0.1
+NODE B forward:1 length:0.18 variation:5 var_perc:0.1
+NODE T leaf:1 density:100 variation:180 length:2 width:0.2 resolution:4
+
+RULE F (0.9):=FF|F
+RULE X:=[+B-T][-B+T][WBST][SBWT]AX
+RULE B:=BB
+RULE A:=AA
+
+START FX
+SEED 1
+STEPS 8
+LEAF_COLOR 0 0.05 0 1
+TRUNK_COLOR 0.05 0.01 0.01 1
